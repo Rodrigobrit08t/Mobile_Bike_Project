@@ -1,37 +1,29 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import React from 'react';
+import { Tabs } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
+export default function Layout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Tabs
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: keyof typeof Ionicons.glyphMap = 'home-outline';
+
+          if (route.name === 'index') iconName = focused ? 'home' : 'home-outline';
+          else if (route.name === 'Stations') iconName = focused ? 'map' : 'map-outline';
+          else if (route.name === 'PurchasePass') iconName = focused ? 'card' : 'card-outline';
+          else if (route.name === 'BikeScreen') iconName = focused ? 'bicycle' : 'bicycle-outline';
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#00C853',
+        tabBarInactiveTintColor: '#B0BEC5',
+      })}
+    >
+      <Tabs.Screen name="index" options={{ title: 'Home', href: '/' }} />
+      <Tabs.Screen name="Stations" options={{ title: 'Mapa', href: '/Stations' }} />
+      <Tabs.Screen name="PurchasePass" options={{ title: 'Comprar Passe', href: '/PurchasePass' }} />
+      <Tabs.Screen name="BikeScreen" options={{ title: 'Bicicletas', href: '/BikeScreen' }} />
+    </Tabs>
   );
 }
