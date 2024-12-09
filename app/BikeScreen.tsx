@@ -11,11 +11,12 @@ export default function BikeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CycleGO</Text>
-      <Text style={styles.subtitle}>Scan QR codes to unlock your ride!</Text>
+      <Text style={styles.subtitle}>Escaneie o QR code para liberar sua bicicleta!</Text>
 
       <View style={styles.buttonContainer}>
         <Pressable onPress={requestPermission} style={styles.button}>
-          <Text style={styles.buttonText}>Request Camera Permissions</Text>
+          <Text style={styles.buttonText}>
+          Solicitar permissões de câmera</Text>
         </Pressable>
 
         <Pressable
@@ -23,7 +24,7 @@ export default function BikeScreen() {
           disabled={!isPermissionGranted}
           style={[styles.button, { opacity: isPermissionGranted ? 1 : 0.5 }]}
         >
-          <Text style={styles.buttonText}>Scan QR Code</Text>
+          <Text style={styles.buttonText}>Escanear QR Code</Text>
         </Pressable>
       </View>
     </View>

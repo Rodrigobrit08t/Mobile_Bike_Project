@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 
-export default function HomeScreen() {
+export default function Index() {
   const router = useRouter();
 
   const handleSeeNearbyStations = () => {
-    router.push('/Stations'); // Navigates to the Stations screen
+    router.push('/Stations'); 
   };
 
   return (

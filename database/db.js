@@ -89,6 +89,32 @@ export const insertDefaultPasses = () => {
   });
 };
 
+export const insertDefaultStations = () => {
+  db.transaction(tx => {
+    tx.executeSql(
+      `INSERT OR IGNORE INTO stations (name, latitude, longitude) VALUES 
+      ("Station A", 40.712776, -74.005974),
+      ("Station B", 40.785091, -73.968285);`,
+      [],
+      () => console.log('Default stations inserted successfully'),
+      error => console.error('Error inserting default stations:', error)
+    );
+  });
+};
+
+export const insertDefaultBikes = () => {
+  db.transaction(tx => {
+    tx.executeSql(
+      `INSERT OR IGNORE INTO bikes (model, status, current_location, last_serviced_date) VALUES 
+      ("Mountain Bike", "available", "Station A", "2024-11-30"),
+      ("Electric Bike", "maintenance", "Station B", "2024-10-15");`,
+      [],
+      () => console.log('Default bikes inserted successfully'),
+      error => console.error('Error inserting default bikes:', error)
+    );
+  });
+};
+
 export const insertBike = (model, status = 'available', currentLocation = null, lastServicedDate = null) => {
   db.transaction(tx => {
     tx.executeSql(

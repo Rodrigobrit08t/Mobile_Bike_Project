@@ -1,23 +1,20 @@
 import React, { useEffect } from 'react';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { createTables, insertDefaultPasses, fetchPasses, insertBike, insertStation } from '../database/db';
+import { createTables, insertDefaultPasses, insertDefaultStations, insertDefaultBikes, fetchPasses } from '../database/db';
 
 export default function Layout() {
-
   useEffect(() => {
-    createTables();
-
-    insertDefaultPasses();/*
-    insertBike('Mountain Bike', 'available', 'Station A', '2024-11-30');
-    insertBike('Electric Bike', 'maintenance', 'Station B', '2024-10-15');*/
-
-    insertStation('Station A', 40.712776, -74.005974); 
-    insertStation('Station B', 40.785091, -73.968285);
-
-    
-    fetchPasses((data: any) => console.log('Passes:', data));
-  }, []); 
+    try {
+      //createTables();
+      //insertDefaultPasses();
+      //insertDefaultStations();  
+      //insertDefaultBikes();
+      //fetchPasses((data: any) => console.log('Passes:', data));
+    } catch (error) {
+      console.error('Error during database initialization:', error);
+    }
+  }, []);
 
   return (
     <Tabs
