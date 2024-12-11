@@ -11,7 +11,6 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>CycleGO</Text>
         <Text style={styles.welcomeMessage}>
@@ -19,19 +18,18 @@ export default function Index() {
         </Text>
       </View>
 
-      {/* Middle Section */}
       <View style={styles.middle}>
         <Image
-          source={{ uri: 'https://via.placeholder.com/300x200.png?text=Bicycle+Image' }}
+          source={{ uri: 'https://via.placeholder.com/300x200' }} // Updated with remote image URL
           style={styles.image}
           resizeMode="cover"
+          onError={(e) => console.log('Image load error:', e.nativeEvent.error)}
         />
         <TouchableOpacity style={styles.actionButton} onPress={handleSeeNearbyStations}>
           <Text style={styles.actionButtonText}>Ver estações próximas</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Footer */}
       <View style={styles.footer}>
         <Text style={styles.achievements}>
           Você já explorou 3 estações diferentes. Descubra mais!
@@ -73,6 +71,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 10,
     marginBottom: 20,
+    backgroundColor: '#007BFF',
   },
   actionButton: {
     backgroundColor: '#00C853',

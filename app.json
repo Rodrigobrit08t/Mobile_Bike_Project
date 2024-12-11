@@ -3,6 +3,14 @@
     "name": "ProjectBike",
     "slug": "ProjectBike",
     "version": "1.0.0",
+    "sdkVersion": "52.0.0",
+    "extra": {
+      "eas": {
+        "build": {
+          "newArchEnabled": true
+        }
+      }
+    },
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
