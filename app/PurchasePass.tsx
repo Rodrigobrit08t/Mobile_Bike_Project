@@ -2,14 +2,29 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
 export default function PurchasePass() {
+
   const handleCardPress = (passType: string, price: string) => {
     Alert.alert(
       "Confirmar Compra",
       `Você tem certeza que quer comprar o passe de ${passType} por $${price}?`,
       [
         { text: "Cancelar", style: "cancel" },
-        { text: "Sim", onPress: () => console.log("Compra Confirmada!") },
+        { 
+          text: "Sim", 
+          onPress: () => {
+            console.log("Compra Confirmada!");
+            showConfirmationMessage(passType);
+          } 
+        },
       ]
+    );
+  };
+
+  const showConfirmationMessage = (passType: string) => {
+    Alert.alert(
+      "Compra Realizada",
+      `Você comprou com sucesso o passe de ${passType}!`,
+      [{ text: "OK" }]
     );
   };
 

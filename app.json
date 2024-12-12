@@ -3,7 +3,6 @@
     "name": "ProjectBike",
     "slug": "ProjectBike",
     "version": "1.0.0",
-    "sdkVersion": "52.0.0",
     "extra": {
       "eas": {
         "build": {

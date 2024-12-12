@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient'; 
 
 export default function Index() {
   const router = useRouter();
@@ -11,16 +12,19 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <LinearGradient 
+        colors={['#00C853', '#009688']} 
+        style={styles.header}
+      >
         <Text style={styles.title}>CycleGO</Text>
         <Text style={styles.welcomeMessage}>
           Bem-vindo ao CycleGO! Encontre bicicletas, explore a cidade e movimente-se com liberdade
         </Text>
-      </View>
+      </LinearGradient>
 
       <View style={styles.middle}>
         <Image
-          source={{ uri: 'https://via.placeholder.com/300x200' }} // Updated with remote image URL
+          source={{ uri: 'https://via.placeholder.com/300x200' }}
           style={styles.image}
           resizeMode="cover"
           onError={(e) => console.log('Image load error:', e.nativeEvent.error)}
@@ -46,7 +50,6 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#00C853',
     alignItems: 'center',
   },
   title: {
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   image: {
-    width: 300,
+    width: '100%', 
     height: 200,
     borderRadius: 10,
     marginBottom: 20,

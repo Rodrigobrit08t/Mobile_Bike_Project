@@ -1,40 +1,57 @@
 import SQLite from 'react-native-sqlite-storage';
 
-// Open the database
-const db = SQLite.openDatabase(
-  {
-    name: 'cycleGO.db',
-    location: 'default',
-  },
-  () => console.log('Database opened successfully'),
-  error => console.error('Error opening database:', error)
-);
+export const getDatabaseConnection = () => {
+  const db = SQLite.openDatabase(
+    {
+      name: 'cycleGO.db',
+      location: 'default',
+    },
+    () => console.log('Database opened successfully'),
+    error => console.error('Error opening database:', error)
+  );
+  return db;
+};
+
+const db = getDatabaseConnection();
 
 // Create tables
 export const createTables = () => {
-  db.transaction(tx => {
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS passes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        type TEXT NOT NULL,
-        price REAL NOT NULL
-      );`,
-      [],
-      () => console.log('Table "passes" created successfully'),
-      error => console.error('Error creating table "passes":', error)
-    );
 
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS stations (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        latitude REAL NOT NULL,
-        longitude REAL NOT NULL
-      );`,
-      [],
-      () => console.log('Table "stations" created successfully'),
-      error => console.error('Error creating table "stations":', error)
-    );
+  if (!db) {
+    console.error('Database is not initialized.');
+    return;
+  }
+
+  db.transaction(
+    tx => {
+      tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS passes (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          type TEXT NOT NULL,
+          price REAL NOT NULL
+        );`,
+        [],
+        () => console.log('Table "passes" created successfully'),
+        (_, error) => {
+          console.error('Error creating table "passes":', error);
+          return false;
+        }
+      );
+
+      tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS stations (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          latitude REAL NOT NULL,
+          longitude REAL NOT NULL
+        );`,
+        [],
+        () => console.log('Table "stations" created successfully'),
+        (_, error) => {
+          console.error('Error creating table "stations":', error);
+          return false;
+        }
+      );
 
     tx.executeSql(
       `CREATE TABLE IF NOT EXISTS bikes (

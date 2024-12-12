@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router';
 export default function BikeScreen() {
   const [permission, requestPermission] = useCameraPermissions();
   const isPermissionGranted = Boolean(permission?.granted);
-  const router = useRouter(); 
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
@@ -16,11 +16,11 @@ export default function BikeScreen() {
       <View style={styles.buttonContainer}>
         <Pressable onPress={requestPermission} style={styles.button}>
           <Text style={styles.buttonText}>
-          Solicitar permissões de câmera</Text>
+            Solicitar permissões de câmera</Text>
         </Pressable>
 
         <Pressable
-          onPress={() => router.push('./Scanner')}
+          onPress={() => router.push('/Scanner')}
           disabled={!isPermissionGranted}
           style={[styles.button, { opacity: isPermissionGranted ? 1 : 0.5 }]}
         >

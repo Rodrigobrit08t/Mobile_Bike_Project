@@ -44,7 +44,7 @@ export default function Scanner() {
       >
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Text style={styles.text}>Flip Camera</Text>
+            <Text style={styles.text}>Virar Câmera</Text>
           </TouchableOpacity>
         </View>
       </CameraView>
